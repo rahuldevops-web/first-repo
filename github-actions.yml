@@ -1,0 +1,25 @@
+name: CICD pipeline for repo
+
+
+# run/ trigger pipeline only when somebody push in main/master branch.
+on:
+  push:
+    branches: [ main ]
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Environment
+        run: chmod +x deploy.sh
+
+      - name: run script
+        run: ./deploy.sh
+      - name: finish deployment
+        run: echo "deployment success"
+
